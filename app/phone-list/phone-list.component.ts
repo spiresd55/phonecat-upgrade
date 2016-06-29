@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
 import {Phone, PhoneData} from '../core/phone/phone.service';
+import { RouterLink } from '@angular/router-deprecated';
 
 @Component({
   selector: 'phone-list',
-  templateUrl: 'phone-list/phone-list.template.html'
+  templateUrl: 'phone-list/phone-list.template.html',
+  directives: [ RouterLink ]
 })
 
 export class PhoneListComponent {

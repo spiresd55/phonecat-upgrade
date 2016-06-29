@@ -1,12 +1,18 @@
+import {Component, Inject} from '@angular/core';
 import {Phone, PhoneData} from '../core/phone/phone.service';
+import { CheckMarkPipe } from '../core/checkmark/checkmark.pipe';
 
-class PhoneDetailController {
+@Component({
+  selector: 'phone-detail',
+  templateUrl: 'phone-detail/phone-detail.template.html',
+  pipes: [ CheckMarkPipe]
+})
+
+export class PhoneDetailComponent {
   phone: PhoneData;
   mainImageUrl: string;
 
-  static $inject = ['$routeParams', 'phone'];
-
-  constructor($routeParams: angular.route.IRouteParamsService, phone: Phone) {
+  constructor(@Inject('$routeParams') $routeParams: angular.route.IRouteParamsService, phone: Phone) {
     let phoneId = $routeParams['phoneId'];
     phone.get(phoneId).subscribe(data => {
       this.phone = data;
@@ -19,10 +25,3 @@ class PhoneDetailController {
   }
 }
 
-// Register `phoneDetail` component, along with its associated controller and template
-angular.
-  module('phoneDetail').
-  component('phoneDetail', {
-    templateUrl: 'phone-detail/phone-detail.template.html',
-    controller: PhoneDetailController
-  });
